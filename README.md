@@ -3,7 +3,7 @@ A blinking library for Micropython for usual LED's on a GPIO and addressable WS2
 
 I wrote this library for my Rasperry Pico Pi with RP2040 processor.
 
-How to use the library with usual LED. Negative repetitions blink forever. No params blink forever for one second on and one second off.
+How to use the library with usual LED.
 
 
 ```python
@@ -33,3 +33,4 @@ neo_led1 = NeoLED(neo_string,1) # params object NeoString, int index of LED
 neo_led1.set_color((0,100,0)) # params tupel (byte, byte, byte) (green, red, blue) set the color of the led 
 neo_led1.blink(2) # blink two times with 1 second on and 1 second off
 ```
+Negative repetitions blink forever. No params blink forever for one second on and one second off.
