@@ -35,6 +35,9 @@ class ValueChange:
         self._n = 0
 
 class OutputDevice:
+    """
+    Base class for output devices. 
+    """   
     
     def is_active(self):
         pass
@@ -61,6 +64,12 @@ class OutputDevice:
         
         
 class LED(OutputDevice):
+    """
+    Represents an LED.
+    
+    :param int pin
+    The pin where the LED is connected to.
+    """   
     
     def __init__(self, pin):
         self._pin_num = pin
@@ -82,6 +91,18 @@ class LED(OutputDevice):
         self._pin.toggle()
         
 class Neo(OutputDevice):
+    """
+    Represents an RGB LED (Neopixel) with WS2812 controller in a LED string.
+    
+    :param int pin
+    The pin where the LED string is connected to.
+    
+    :param int length
+    The length of the LED string.
+    
+    :param int index
+    The index of the assigned LED. Must be between 0 and length-1.
+    """   
 
     def __init__(self, pin, length, index):
         self._pin_num = pin
