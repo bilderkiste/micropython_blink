@@ -83,13 +83,13 @@ class LED(OutputDevice):
         
 class Neo(OutputDevice):
 
-    def __init__(self, pin, index):
+    def __init__(self, pin, length, index):
         self._pin_num = pin
         self._led_index = index
         
         self._color = (30,30,30)
         
-        self._neo = NeoPixel(Pin(pin), 4)
+        self._neo = NeoPixel(Pin(pin), length)       
         
     def on(self):
         self._neo[self._led_index] = self._color
