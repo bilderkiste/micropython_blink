@@ -21,6 +21,12 @@ class ValueChange:
         if self._n == 0:
             return
         
+        # Counter for infity blinking
+        if self._n == -1:
+            self._n -= 1
+        elif self._n == -2:
+            self._n += 1
+        
         if self._n % 2 == 0:
             ms = self._on_time
         else:
@@ -28,6 +34,7 @@ class ValueChange:
         
         if self._n > 0:
             self._n -= 1
+            
         self._output_device.toggle()
         self._timer.init(period=ms, mode=Timer.ONE_SHOT, callback=self._set_value)
         
@@ -63,6 +70,9 @@ class OutputDevice:
         self.off()
         
         off_time = on_time if off_time is None else off_time
+        
+        # Parameter n<1 are not allowed. Set parameter to -1.
+        if n < -1 : n = -1
         
         self._valueChanger = ValueChange(self, n, on_time, off_time)
         
