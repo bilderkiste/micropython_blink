@@ -1,4 +1,4 @@
-from blink import Neo
+from blink import Neo, LED
 from time import sleep
 import machine
 import time
