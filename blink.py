@@ -40,7 +40,8 @@ class OutputDevice:
     """
     
     def __init__(self):
-        self.off()
+        #self.off()
+        pass
     
     def is_active(self):
         pass
@@ -94,39 +95,51 @@ class LED(OutputDevice):
     def toggle(self):
         self._pin.toggle()
         
-class Neo(OutputDevice):
+class NeoString():
     """
-    Represents an RGB LED (Neopixel) with WS2812 controller in a LED string.
+    Represents an RGB LED string with WS2812 controlled LED's.
     
     :param int pin
     The pin where the LED string is connected to.
     
     :param int length
     The length of the LED string.
+    """
+
+    def __init__(self, pin, length):
+        self._neo_string = NeoPixel(Pin(pin), length)
+  
+    def get(self):
+        return self._neo_string
+     
+class NeoLED(OutputDevice):
+    """
+    Represents an RGB LED (Neopixel) with WS2812 controller in a LED string.
+    
+    :param object neostring
+    The LED string the LED ist beloning to.
     
     :param int index
     The index of the assigned LED. Must be between 0 and length-1.
-    """   
-
-    def __init__(self, pin, length, index):
-        self._pin_num = pin
+    """
+    
+    def __init__(self, neo_string, index):
         self._led_index = index
-        
+        self._neo = neo_string
         self._color = (30,30,30)
         
-        self._neo = NeoPixel(Pin(pin), length)
         super().__init__()
         
     def on(self):
-        self._neo.__setitem__(self._led_index, self._color)
-        self._neo.write()
+        self._neo.get().__setitem__(self._led_index, self._color)
+        self._neo.get().write()
         
     def off(self):
-        self._neo.__setitem__(self._led_index, (0,0,0))
-        self._neo.write()    
+        self._neo.get().__setitem__(self._led_index, (0,0,0))
+        self._neo.get().write()    
       
     def toggle(self):
-        if self._neo.__getitem__(self._led_index) == (0,0,0):
+        if self._neo.get().__getitem__(self._led_index) == (0,0,0):
             self.on()
         else:
             self.off()
