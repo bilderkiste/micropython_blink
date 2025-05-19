@@ -36,8 +36,11 @@ class ValueChange:
 
 class OutputDevice:
     """
-    Base class for output devices. 
-    """   
+    Abstract base class for output devices.
+    """
+    
+    def __init__(self):
+        self.off()
     
     def is_active(self):
         pass
@@ -74,6 +77,7 @@ class LED(OutputDevice):
     def __init__(self, pin):
         self._pin_num = pin
         self._pin = Pin(pin, Pin.OUT)
+        super().__init__()
         
     def is_active(self):
         if self._pin.value():
@@ -110,18 +114,19 @@ class Neo(OutputDevice):
         
         self._color = (30,30,30)
         
-        self._neo = NeoPixel(Pin(pin), length)       
+        self._neo = NeoPixel(Pin(pin), length)
+        super().__init__()
         
     def on(self):
-        self._neo[self._led_index] = self._color
+        self._neo.__setitem__(self._led_index, self._color)
         self._neo.write()
         
     def off(self):
-        self._neo[self._led_index] = (0,0,0)
+        self._neo.__setitem__(self._led_index, (0,0,0))
         self._neo.write()    
       
     def toggle(self):
-        if self._neo[self._led_index] == (0,0,0):
+        if self._neo.__getitem__(self._led_index) == (0,0,0):
             self.on()
         else:
             self.off()
