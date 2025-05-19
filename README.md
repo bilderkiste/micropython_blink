@@ -28,7 +28,7 @@ import machine
 
 # initialize the Neopixel string
 neo_string = NeoString(1,4) # params int GPIO Number, number int of LED's in the string
-# initialize LED no 1 string
+# initialize the second LED in the string
 neo_led1 = NeoLED(neo_string,1) # params object NeoString, int index of LED 
 neo_led1.set_color((0,100,0)) # params tupel (byte, byte, byte) (green, red, blue) set the color of the led 
 neo_led1.blink(2) # blink two times with 1 second on and 1 second off
