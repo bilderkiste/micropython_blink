@@ -1,7 +1,7 @@
 # micropython_blink
 A blinking library for Micropython for usual LED's on a GPIO and addressable WS2812 based LED's.
 
-I wrote this library for my Rasperry Pico Pi with RP2040 processor.
+I wrote this library for my Rasperry Pico Pi with RP2040 processor to use usual and WS2812 based LED's as status indicator for my projects.
 
 How to use the library with usual LED.
 
